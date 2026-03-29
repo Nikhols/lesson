@@ -14,20 +14,20 @@ const LessonGrid = styled.div`
 const LessonCard = styled(NavLink)`
   padding: 20px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: ${({ theme }) => theme.surfaceBackground};
+  border: 1px solid ${({ theme }) => theme.surfaceBorder};
   transition:
     transform 0.2s ease,
     border-color 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(255, 196, 117, 0.5);
+    border-color: ${({ theme }) => theme.sectionActiveBorder};
   }
 `;
 
 const LessonNumber = styled.span`
-  color: #ffd598;
+  color: ${({ theme }) => theme.accentText};
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -40,7 +40,7 @@ const LessonTitle = styled.h2`
 
 const LessonDescription = styled.p`
   margin: 0;
-  color: rgba(246, 239, 229, 0.7);
+  color: ${({ theme }) => theme.textMuted};
   line-height: 1.6;
 `;
 

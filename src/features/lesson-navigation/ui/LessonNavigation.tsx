@@ -13,8 +13,8 @@ import { routes } from '@/shared/config/routes';
 const Card = styled.nav`
   padding: 24px;
   border-radius: 28px;
-  background: rgba(12, 14, 19, 0.74);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: ${({ theme }) => theme.panelBackground};
+  border: 1px solid ${({ theme }) => theme.panelBorder};
   backdrop-filter: blur(18px);
 `;
 
@@ -33,7 +33,7 @@ const LessonList = styled.div`
   max-height: calc(100vh - 220px);
   overflow-y: auto;
   padding-right: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid ${({ theme }) => theme.separator};
 
   @media (max-width: 1080px) {
     max-height: 420px;
@@ -43,15 +43,15 @@ const LessonList = styled.div`
 const LessonLink = styled(NavLink)<{ $isCurrent: boolean; $isDone: boolean }>`
   display: block;
   padding: 14px 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  color: ${({ $isCurrent }) => ($isCurrent ? '#fff7ea' : 'rgba(246, 239, 229, 0.82)')};
+  border-bottom: 1px solid ${({ theme }) => theme.separator};
+  color: ${({ theme, $isCurrent }) => ($isCurrent ? theme.accentStrongText : theme.text)};
   opacity: ${({ $isCurrent }) => ($isCurrent ? 1 : 0.92)};
   transition:
     color 0.2s ease,
     opacity 0.2s ease;
 
   &:hover {
-    color: #fff3dc;
+    color: ${({ theme }) => theme.accentStrongText};
     opacity: 1;
   }
 `;
@@ -71,7 +71,7 @@ const LessonHeadingText = styled.div`
 `;
 
 const LessonOrder = styled.span`
-  color: rgba(246, 239, 229, 0.45);
+  color: ${({ theme }) => theme.textSubtle};
   font-size: 14px;
   font-weight: 700;
   flex-shrink: 0;
@@ -91,19 +91,17 @@ const LessonDoneMark = styled.span`
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(159, 232, 112, 0.28), rgba(91, 168, 61, 0.2));
-  border: 1px solid rgba(159, 232, 112, 0.42);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 6px 14px rgba(91, 168, 61, 0.2);
+  background: ${({ theme }) => theme.doneBadgeBackground};
+  border: 1px solid ${({ theme }) => theme.doneBadgeBorder};
+  box-shadow: ${({ theme }) => theme.doneBadgeShadow};
   flex-shrink: 0;
 
   &::after {
     content: '';
     width: 8px;
     height: 4px;
-    border-left: 2px solid #efffe4;
-    border-bottom: 2px solid #efffe4;
+    border-left: 2px solid ${({ theme }) => theme.doneBadgeCheck};
+    border-bottom: 2px solid ${({ theme }) => theme.doneBadgeCheck};
     transform: translateY(-1px) rotate(-45deg);
   }
 `;

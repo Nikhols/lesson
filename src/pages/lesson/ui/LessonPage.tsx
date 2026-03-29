@@ -16,8 +16,8 @@ import { PageShell } from '@/shared/ui/PageShell';
 const TableCard = styled.div`
   overflow: hidden;
   border-radius: 28px;
-  background: rgba(12, 14, 19, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: ${({ theme }) => theme.panelBackgroundStrong};
+  border: 1px solid ${({ theme }) => theme.panelBorder};
 `;
 
 const TableWrap = styled.div`
@@ -33,28 +33,28 @@ const Table = styled.table`
 const HeadCell = styled.th`
   padding: 18px 20px;
   text-align: left;
-  color: #ffd598;
+  color: ${({ theme }) => theme.accentText};
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.04);
+  background: ${({ theme }) => theme.surfaceBackgroundAlt};
 `;
 
 const Cell = styled.td`
   padding: 18px 20px;
   vertical-align: top;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid ${({ theme }) => theme.separatorSubtle};
   line-height: 1.65;
 `;
 
 const Code = styled.pre`
   margin: 0;
   white-space: pre-wrap;
-  color: #cfe0ff;
+  color: ${({ theme }) => theme.infoText};
 `;
 
 const Result = styled.div`
-  color: #9fe870;
+  color: ${({ theme }) => theme.successText};
   font-weight: 600;
 `;
 
@@ -67,7 +67,7 @@ const Actions = styled.div`
 `;
 
 const Status = styled.span`
-  color: rgba(246, 239, 229, 0.62);
+  color: ${({ theme }) => theme.textMuted};
 `;
 
 const ToggleButton = styled.button<{ $isDone: boolean }>`
@@ -75,8 +75,9 @@ const ToggleButton = styled.button<{ $isDone: boolean }>`
   border-radius: 999px;
   padding: 14px 20px;
   cursor: pointer;
-  background: ${({ $isDone }) => ($isDone ? '#9fe870' : '#ffd598')};
-  color: #17191f;
+  background: ${({ theme, $isDone }) =>
+    $isDone ? theme.successButtonBackground : theme.primaryButtonBackground};
+  color: ${({ theme }) => theme.primaryButtonText};
   font-weight: 800;
 `;
 

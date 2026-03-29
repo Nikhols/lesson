@@ -2,11 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    color: #f6efe5;
-    background:
-      radial-gradient(circle at top left, rgba(255, 196, 117, 0.28), transparent 28%),
-      radial-gradient(circle at bottom right, rgba(48, 111, 242, 0.24), transparent 32%),
-      linear-gradient(135deg, #17191f 0%, #0f1117 45%, #141a24 100%);
     font-family: "Manrope", "Segoe UI", sans-serif;
   }
 
@@ -18,13 +13,20 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    color: #f6efe5;
-    background: transparent;
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.pageBackground};
+    transition:
+      color 0.25s ease,
+      background 0.25s ease;
   }
 
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  #root {
+    min-height: 100vh;
   }
 
   button,

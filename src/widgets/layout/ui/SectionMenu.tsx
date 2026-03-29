@@ -12,24 +12,25 @@ const Menu = styled.nav`
 const MenuLink = styled(NavLink)`
   padding: 14px 18px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(246, 239, 229, 0.74);
+  background: ${({ theme }) => theme.surfaceBackground};
+  border: 1px solid ${({ theme }) => theme.panelBorder};
+  color: ${({ theme }) => theme.textMuted};
   font-weight: 700;
   transition:
     transform 0.2s ease,
     background 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    color 0.2s ease;
 
   &.active {
-    background: rgba(255, 196, 117, 0.14);
-    border-color: rgba(255, 196, 117, 0.55);
-    color: #fff3dc;
+    background: ${({ theme }) => theme.sectionActiveBackground};
+    border-color: ${({ theme }) => theme.sectionActiveBorder};
+    color: ${({ theme }) => theme.accentStrongText};
   }
 
   &:hover {
     transform: translateY(-2px);
-    background: rgba(48, 111, 242, 0.18);
+    background: ${({ theme }) => theme.sectionHoverBackground};
   }
 `;
 

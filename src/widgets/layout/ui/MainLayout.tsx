@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { LessonNavigation } from '@/features/lesson-navigation/ui/LessonNavigation';
+import { ThemeToggle } from '@/widgets/layout/ui/ThemeToggle';
 import { SectionMenu } from './SectionMenu';
 
 const Layout = styled.div`
@@ -14,9 +15,17 @@ const Header = styled.header`
   margin: 0 auto 24px;
   padding: 20px 24px;
   border-radius: 28px;
-  background: rgba(12, 14, 19, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: ${({ theme }) => theme.panelBackground};
+  border: 1px solid ${({ theme }) => theme.panelBorder};
   backdrop-filter: blur(18px);
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 `;
 
 const Grid = styled.div`
@@ -49,7 +58,10 @@ export const MainLayout = () => {
   return (
     <Layout>
       <Header>
-        <SectionMenu />
+        <HeaderRow>
+          <SectionMenu />
+          <ThemeToggle />
+        </HeaderRow>
       </Header>
       <Grid>
         <Sidebar>
