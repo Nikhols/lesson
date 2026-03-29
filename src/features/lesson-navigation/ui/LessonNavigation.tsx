@@ -28,53 +28,84 @@ const BrandTitle = styled.div`
   font-weight: 800;
 `;
 
-const BrandDescription = styled.p`
-  margin: 8px 0 0;
-  color: rgba(246, 239, 229, 0.68);
-  line-height: 1.5;
-`;
-
 const LessonList = styled.div`
   display: grid;
-  gap: 12px;
-`;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  padding-right: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 
-const LessonLink = styled(NavLink)<{ $isCurrent: boolean; $isDone: boolean }>`
-  display: grid;
-  gap: 6px;
-  padding: 16px 18px;
-  border-radius: 20px;
-  background: ${({ $isCurrent }) =>
-    $isCurrent ? 'rgba(48, 111, 242, 0.22)' : 'rgba(255, 255, 255, 0.03)'};
-  border: 1px solid
-    ${({ $isCurrent }) =>
-      $isCurrent ? 'rgba(115, 166, 255, 0.42)' : 'rgba(255, 255, 255, 0.06)'};
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 196, 117, 0.12);
+  @media (max-width: 1080px) {
+    max-height: 420px;
   }
 `;
 
-const LessonMeta = styled.span`
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+const LessonLink = styled(NavLink)<{ $isCurrent: boolean; $isDone: boolean }>`
+  display: block;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: ${({ $isCurrent }) => ($isCurrent ? '#fff7ea' : 'rgba(246, 239, 229, 0.82)')};
+  opacity: ${({ $isCurrent }) => ($isCurrent ? 1 : 0.92)};
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    color: #fff3dc;
+    opacity: 1;
+  }
+`;
+
+const LessonHeading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+const LessonHeadingText = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+`;
+
+const LessonOrder = styled.span`
   color: rgba(246, 239, 229, 0.45);
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
 `;
 
 const LessonTitle = styled.span`
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
 `;
 
-const LessonState = styled.span<{ $isDone: boolean }>`
-  color: ${({ $isDone }) => ($isDone ? '#9fe870' : 'rgba(246, 239, 229, 0.54)')};
-  font-size: 14px;
+const LessonDoneMark = styled.span`
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(159, 232, 112, 0.28), rgba(91, 168, 61, 0.2));
+  border: 1px solid rgba(159, 232, 112, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 6px 14px rgba(91, 168, 61, 0.2);
+  flex-shrink: 0;
+
+  &::after {
+    content: '';
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid #efffe4;
+    border-bottom: 2px solid #efffe4;
+    transform: translateY(-1px) rotate(-45deg);
+  }
 `;
 
 export const LessonNavigation = () => {
@@ -89,9 +120,6 @@ export const LessonNavigation = () => {
     <Card>
       <Brand to={activeSection?.path ?? routes.home}>
         <BrandTitle>{activeSection?.title} Handbook</BrandTitle>
-        <BrandDescription>
-          {activeSection?.description}
-        </BrandDescription>
       </Brand>
       <LessonList>
         {sectionLessons.map((lesson) => {
@@ -104,11 +132,13 @@ export const LessonNavigation = () => {
               $isCurrent={lesson.id === currentLessonId}
               $isDone={isDone}
             >
-              <LessonMeta>Урок {lesson.order}</LessonMeta>
-              <LessonTitle>{lesson.title}</LessonTitle>
-              <LessonState $isDone={isDone}>
-                {isDone ? 'Изучено' : 'Открыть урок'}
-              </LessonState>
+              <LessonHeading>
+                <LessonHeadingText>
+                  <LessonOrder>{lesson.order}.</LessonOrder>
+                  <LessonTitle>{lesson.title}</LessonTitle>
+                </LessonHeadingText>
+                {isDone ? <LessonDoneMark aria-label="Урок изучен" /> : null}
+              </LessonHeading>
             </LessonLink>
           );
         })}

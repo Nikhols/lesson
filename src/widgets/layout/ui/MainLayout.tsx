@@ -19,14 +19,6 @@ const Header = styled.header`
   backdrop-filter: blur(18px);
 `;
 
-const HeaderTitle = styled.div`
-  margin-bottom: 16px;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(246, 239, 229, 0.52);
-`;
-
 const Grid = styled.div`
   display: grid;
   grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
@@ -57,7 +49,6 @@ export const MainLayout = () => {
   return (
     <Layout>
       <Header>
-        <HeaderTitle>Справочники и уроки</HeaderTitle>
         <SectionMenu />
       </Header>
       <Grid>

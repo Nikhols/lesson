@@ -3,13 +3,7 @@ import styled from 'styled-components';
 
 import { lessons } from '@/entities/lesson/model/lessons';
 import { getSectionById } from '@/entities/lesson/model/sections';
-import {
-  Description,
-  HeroCard,
-  Label,
-  PageShell,
-  Title,
-} from '@/shared/ui/PageShell';
+import { PageShell } from '@/shared/ui/PageShell';
 
 const LessonGrid = styled.div`
   display: grid;
@@ -60,11 +54,6 @@ export const HomePage = ({ sectionId }: HomePageProps) => {
 
   return (
     <PageShell>
-      <HeroCard>
-        <Label>{section?.title}</Label>
-        <Title>{section?.heroTitle}</Title>
-        <Description>{section?.heroDescription}</Description>
-      </HeroCard>
       <LessonGrid>
         {sectionLessons.map((lesson) => (
           <LessonCard key={lesson.id} to={lesson.path}>

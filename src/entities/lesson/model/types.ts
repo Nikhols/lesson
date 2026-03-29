@@ -20,7 +20,5 @@ export interface HandbookSection {
   title: string;
   shortTitle: string;
   description: string;
-  heroTitle: string;
-  heroDescription: string;
   path: string;
 }

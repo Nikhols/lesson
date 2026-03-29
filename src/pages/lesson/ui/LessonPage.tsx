@@ -4,22 +4,14 @@ import styled from 'styled-components';
 
 import { AppDispatch } from '@/app/store';
 import { lessons } from '@/entities/lesson/model/lessons';
-import { getSectionById } from '@/entities/lesson/model/sections';
 import {
   selectCompletedLessonIds,
-  selectCurrentLessonId,
 } from '@/entities/lesson/model/selectors';
 import {
   setCurrentLesson,
   toggleCompletedLesson,
 } from '@/entities/lesson/model/lesson-progress-slice';
-import {
-  Description,
-  HeroCard,
-  Label,
-  PageShell,
-  Title,
-} from '@/shared/ui/PageShell';
+import { PageShell } from '@/shared/ui/PageShell';
 
 const TableCard = styled.div`
   overflow: hidden;
@@ -95,10 +87,8 @@ interface LessonPageProps {
 export const LessonPage = ({ lessonId }: LessonPageProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const completedLessonIds = useSelector(selectCompletedLessonIds);
-  const currentLessonId = useSelector(selectCurrentLessonId);
 
   const lesson = lessons.find((item) => item.id === lessonId);
-  const section = lesson ? getSectionById(lesson.sectionId) : null;
 
   useEffect(() => {
     dispatch(setCurrentLesson(lessonId));
@@ -112,15 +102,6 @@ export const LessonPage = ({ lessonId }: LessonPageProps) => {
 
   return (
     <PageShell>
-      <HeroCard>
-        <Label>
-          {section?.title} • Урок {lesson.order}{' '}
-          {currentLessonId === lessonId ? '• сейчас открыт' : ''}
-        </Label>
-        <Title>{lesson.title}</Title>
-        <Description>{lesson.description}</Description>
-      </HeroCard>
-
       <Actions>
         <Status>
           Таблица показывает понятие, объяснение, пример и ожидаемый результат.
